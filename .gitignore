@@ -4,6 +4,7 @@ project/target
 target
 lib_managed
 .idea
+.iml
 
 ### macOS ###
 # General
