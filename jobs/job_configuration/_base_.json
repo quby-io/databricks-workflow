@@ -1,0 +1,32 @@
+{
+  "settings": {
+    "name": "{{ENVIRONMENT}} - {{JOB_NAME}}",
+    "notebook_task": {
+      "base_parameters": {
+        "environment": "{{ENVIRONMENT}}",
+        "jobName" : "{{JOB_NAME}}"
+      },
+      "notebook_path": "{{NOTEBOOK_ROOT_PATH}}/{{JOB_NAME}}"
+    },
+    "new_cluster": {
+      "enable_elastic_disk": true,
+      "node_type_id": "m4.xlarge",
+      "num_workers": 1,
+      "custom_tags": {
+        "Environment": "{{ENVIRONMENT}}",
+        "JobName": "{{JOB_NAME}}"
+      },
+      "spark_version": "6.5.x-cpu-ml-scala2.11",
+      "spark_env_vars": {
+        "PYSPARK_PYTHON": "/databricks/python3/bin/python3"
+      }
+    }, 
+    "max_concurrent_runs": 1,
+    "timeout_seconds": 28800,
+    "libraries": [
+      {
+        "jar": "{{JAR_DESTINATION}}"
+      }
+    ]
+  }
+}
