@@ -16,7 +16,8 @@
         "on_failure": [
           ""
         ]
-      }
+      },
+      "schedule": null
     }
   }
 }
