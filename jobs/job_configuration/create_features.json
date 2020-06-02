@@ -1,0 +1,17 @@
+{
+  "settings": {
+    "notebook_task": {
+      "base_parameters": {
+        "days": "1"
+      }
+    },
+    "schedule": {
+      "timezone_id": "UTC",
+      "quartz_cron_expression": "0 0 0 * * ?"
+    },
+    "timeout_seconds": 0,
+    "max_concurrent_runs": 1,
+    "max_retries": 3,
+    "min_retry_interval_millis": 300000
+  }
+}

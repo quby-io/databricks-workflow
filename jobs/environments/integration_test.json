@@ -1,0 +1,23 @@
+{
+  "active_jobs": ["initialize", "create_features"],
+  "config": {
+    "settings": {
+      "notebook_task": {
+        "base_parameters": {
+          "rawDb": "integration_test",
+          "featureDb": "integration_test_features"
+        }
+      },
+      "new_cluster": {
+        "node_type_id": "m4.xlarge",
+        "num_workers": 1
+      },
+      "email_notifications": {
+        "on_failure": [
+          ""
+        ]
+      },
+      "schedule": null
+    }
+  }
+}
