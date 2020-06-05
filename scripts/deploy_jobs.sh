@@ -1,15 +1,33 @@
 #!/bin/bash
 set -e
 
-if [ $# -lt 2 ]
+for i in "$@"
+do
+    case $i in
+        --environment=*)
+        ENV="${i#*=}"
+        shift
+        ;;
+        --build_version=*)
+        ARTIFACT_ID="${i#*=}"
+        shift
+        ;;
+        --skip-jobs)
+        SKIP_JOBS=true
+        shift
+        ;;
+        *)
+        echo "Unknown option supplied"
+        ;;
+    esac
+done
+
+if [[ -z $ARTIFACT_ID || -z $ENV ]];
   then
     echo "Please specify the environment (dev/staging/production), and the artifact_id as arguments."
-    echo "Usage: ./deploy_jobs.sh staging build_version"
+    echo "Usage: ./deploy_jobs.sh --environment=staging --build_version==123 [--skip-jobs]"
     exit 1
 fi
-
-ENV=$1
-ARTIFACT_ID=$2
 
 ARTIFACTS_PATH="dbfs:/artifacts/$ARTIFACT_ID/"
 DOWNLOAD_PATH="/tmp/artifacts/tmp"

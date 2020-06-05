@@ -13,7 +13,7 @@ test: ## Runs unit tests
 
 .PHONY: integration_test
 integration_test: publish ## Deploys integration_test jobs to Databricks and runs them
-	bash scripts/deploy_jobs.sh integration_test "$(JAR_VERSION)-$(GIT_REVISION)"
+	bash scripts/deploy_jobs.sh --environment=integration_test --build_version="$(JAR_VERSION)-$(GIT_REVISION)"
 	bash scripts/run_jobs.sh integration_test
 
 .PHONY: install_on_cluster
@@ -25,8 +25,9 @@ publish: assembly ## Publishes artifacts on Databricks dbfs
 	./scripts/publish_artifacts.sh "$(JAR_VERSION)-$(GIT_REVISION)"
 
 .PHONY: deploy
-deploy: publish ## Deploys artifacts, notebooks and jobs to Databricks [make deploy env=staging]
-	bash scripts/deploy_jobs.sh $(env) "$(JAR_VERSION)-$(GIT_REVISION)"
+# deploy: publish ## Deploys artifacts, notebooks and jobs to Databricks [make deploy env=staging]
+deploy:  ## Deploys artifacts, notebooks and jobs to Databricks [make deploy env=staging]
+	bash scripts/deploy_jobs.sh --environment==$(env) --build_version="$(JAR_VERSION)-$(GIT_REVISION)"
 
 .PHONY: import_notebooks
 import_notebooks: ## Imports notebooks from environment deployment [make import_notebooks env=staging]
