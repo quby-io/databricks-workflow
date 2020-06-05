@@ -2,7 +2,7 @@ package com.quby.demo.databricks.storage
 
 import java.sql.Timestamp
 
-import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema}
+import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema, UserRatingSchema}
 import com.quby.demo.databricks.util.{RunOnUTC, SparkActiveSession}
 import org.apache.spark.sql.Dataset
 import org.joda.time.{DateTime, Minutes}
@@ -68,5 +68,26 @@ class SampleRepository(minutesStep: Int, randomSeed: Int = 42)
                                   dateColumnName: String): Unit = {
     logger.info(s"overwriteDateRange method called for $db.$table for range $dateFrom <= $dateColumnName <= $dateTo")
     logger.warn("This is a sample repository, the data will not be persisted.")
+  }
+
+  override def userRating(dateFrom: String, dateTo: String): Dataset[UserRatingSchema] = {
+    val rand = new scala.util.Random()
+    var ratingList = List.empty[UserRatingSchema]
+    range(dateFrom, dateTo)
+      .map(
+        seed => {
+          (1 to 100) foreach (i => {
+            ratingList = ratingList :+ UserRatingSchema.create(i, 1, rand.nextInt(5) + 1, seed.ts.getMillis)
+            ratingList = ratingList :+ UserRatingSchema.create(i, 2, rand.nextInt(5) + 1, seed.ts.getMillis)
+            ratingList = ratingList :+ UserRatingSchema.create(i, 3, rand.nextInt(5) + 1, seed.ts.getMillis)
+            ratingList = ratingList :+ UserRatingSchema.create(i, 4, rand.nextInt(5) + 1, seed.ts.getMillis) // rate for a random item
+          }
+            )
+
+          (1 to 80) foreach (i => ratingList = ratingList :+ UserRatingSchema.create(i, 5, rand.nextInt(5) + 1, seed.ts.getMillis))
+        }
+      )
+    ratingList.toDS()
+
   }
 }

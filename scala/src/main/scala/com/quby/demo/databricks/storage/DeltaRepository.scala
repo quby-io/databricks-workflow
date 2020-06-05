@@ -1,6 +1,6 @@
 package com.quby.demo.databricks.storage
 
-import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema}
+import com.quby.demo.databricks.schema.{ElectricityPowerSchema,RawSchema, UserRatingSchema}
 import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 
@@ -22,6 +22,10 @@ class DeltaRepository(rawDb: String, featureDb: String) extends Repository with 
   override def electricityPower(dateFrom: String, dateTo: String): Dataset[ElectricityPowerSchema] = {
     read(featureDb, TableNames.electricityPower, dateFrom, dateTo)
       .as[ElectricityPowerSchema]
+  }
+  override def userRating(dateFrom: String, dateTo: String): Dataset[UserRatingSchema] = {
+    read(featureDb, TableNames.userRating, dateFrom, dateTo)
+      .as[UserRatingSchema]
   }
 
   override def overwriteDateRange(ds:             Dataset[_],
