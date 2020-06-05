@@ -10,7 +10,7 @@
     },
     "new_cluster": {
       "enable_elastic_disk": true,
-      "node_type_id": "m4.xlarge",
+      "node_type_id": "m5.large",
       "num_workers": 1,
       "custom_tags": {
         "Environment": "{{ENVIRONMENT}}",

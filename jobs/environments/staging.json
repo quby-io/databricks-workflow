@@ -9,7 +9,7 @@
         }
       },
       "new_cluster": {
-        "node_type_id": "m4.xlarge",
+        "node_type_id": "m5.large",
         "num_workers": 1
       },
       "email_notifications": {
