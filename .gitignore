@@ -1,6 +1,7 @@
 metastore_db
 derby.log
 project/target
+jobs/target
 target
 lib_managed
 .idea
