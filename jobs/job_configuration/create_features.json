@@ -12,6 +12,6 @@
     "timeout_seconds": 0,
     "max_concurrent_runs": 1,
     "max_retries": 3,
-    "min_retry_interval_millis": 300000
+    "min_retry_interval_millis": 120000
   }
 }
