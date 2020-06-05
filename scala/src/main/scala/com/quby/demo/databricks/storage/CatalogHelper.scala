@@ -4,6 +4,9 @@ import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 import org.apache.spark.sql.types.StructType
 
+/***
+  * Helper functions to manage Databricks Delta catalog
+  */
 object CatalogHelper extends SparkActiveSession {
   import spark.implicits._
 
@@ -35,22 +38,6 @@ object CatalogHelper extends SparkActiveSession {
 
     propDetails(0).getString(1)
   }
-
-//
-//  def getTableProperties(table: String, properties: String*): Map[String, Boolean] = {
-//    if (!tableExists(table))
-//      throw new NoSuchElementException(s"Table ${table} wasn't found.")
-//
-//    var df = spark.sql(s"SHOW TBLPROPERTIES ${table}")
-//    if (properties.nonEmpty)
-//      df = df.where($"key".isin(properties: _*))
-//
-//    df.collect
-//      .map { r =>
-//        (r.getAs[String]("key"), r.getAs[String]("value").toBoolean)
-//      }
-//      .toMap[String, Boolean]
-//  }
 
   def createDatabaseIfNotExist(database: String): Unit = {
     if (!databaseExists(database)) {
@@ -85,7 +72,4 @@ object CatalogHelper extends SparkActiveSession {
     ${if (location != "") s"location '$location/$database.db/$table'" else ""}
     """
   }
-
-  case class HiveCol(name: String, dataType: String)
-
 }

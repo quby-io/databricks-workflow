@@ -4,6 +4,9 @@ import com.quby.demo.databricks.schema.{RawSchema, ElectricityPowerSchema}
 import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 
+/***
+  * Contains the transformations necessary to clean and extract the electricity signal from the raw data
+  */
 object ElectricityPower extends SparkActiveSession {
 
   import spark.implicits._
