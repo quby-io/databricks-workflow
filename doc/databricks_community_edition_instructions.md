@@ -13,13 +13,22 @@ In order to get started with a community version of Databricks, follow the steps
 2. Install and configure your [Databricks CLI](https://docs.databricks.com/dev-tools/cli/index.html) (This example repository uses your default Databricks profile) 
    1. `pip install databricks-cli`
    2. `databricks configure` (you'll be prompted for your domain, username and password)
-3. Install [jq](https://stedolan.github.io/jq/), we use it to parse and combine JSON configuration files.
+3. Install [jq](https://stedolan.github.io/jq/), we use it to parse and combine JSON configuration files for the jobs.
    1. `brew install jq`
 4. Clone this repository on your local machine 
    1. `git clone git@github.com:quby-io/databricks-workflow.git`
 
 You are good to go :)
 
-Try to execute `make help`, this will show the actions available.
+Try to execute `make help`, this will show the the following actions (note that `deploy`, `integration test` and 
+`import_notebooks` are not available with the community edition):
+- assembly
+- help
+- import_notebooks
+- publish
+- test
+- ~~deploy~~
+- ~~integration_test~~
+- ~~import_notebooks~~
 
 You can now continue with the `project structure` in the original [Readme.md](./jobs/Readme.md).

@@ -25,7 +25,7 @@ with the community edition of follow [these steps](./doc/databricks_community_ed
 2. Install and configure your [Databricks CLI](https://docs.databricks.com/dev-tools/cli/index.html) (This example repository uses your default Databricks profile) 
    1. `pip install databricks-cli`
    2. `databricks configure --token`
-3. Install [jq](https://stedolan.github.io/jq/), we use it to parse and combine JSON configuration files.
+3. Install [jq](https://stedolan.github.io/jq/), we use it to parse and combine JSON configuration files for the jobs.
    1. `brew install jq`
 4. Clone this repository on your local machine 
    1. `git clone git@github.com:quby-io/databricks-workflow.git`
