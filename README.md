@@ -2,25 +2,27 @@
 
 This repository is an *example* of how to use Databricks for setting up a robust data processing pipeline.
 
-If you are part of a Data Engineering or Data Science team, and you want to start a project in Databricks, you can use this repository as a jump-start. 
+If you are part of a Data Engineering or Data Science team, and you want to start a project in Databricks, you can use this repository as a jump start. 
 
-We tried to bake in this code some of the best practices and processes we have set up for production, research and development on top of the Databricks platform since 2017 at [Quby](https://www.quby.com/).
+This template shows some of the best practices and processes we have set up for production, research and development at [Quby](https://www.quby.com/).
 
-This code can help you to get a possible answer for the questions you might have when starting from scratch, like:
+This code can help you to get an answer to the questions you might have when starting from scratch, like:
 * How do I set up a production pipeline in Databricks?
 * How do I run unit tests on Spark transformations?
 * How do I run integration tests on Notebook work flows?
 * How do I rapidly prototype data transformations on real data?
-* How do I refactor the notebooks experiments into tested code?
+* How do I refactor notebook experiments into tested code?
 * How do I organize the code?
 * How do I manage multiple environments and configurations?
 
-# Getting started
+This repository is also an open invitation to all developers out there that see improvements on our current practices. Don't hesitate to contribute and make a pull request with your suggestions!
+
+## Getting started
 
 In order to get started with a paid or trial version of Databricks, follow the steps below. If you want to get started
 with the community edition of follow [these steps](./doc/databricks_community_edition_instructions.md).
 
-1. Setup your [Databricks account](https://databricks.com/try-databricks) (This requires you to have an AWS or Azure account)
+1. Setup your [Databricks account](https://databricks.com/try-databricks) (This requires an AWS or Azure account)
 2. Create an [authentication token](https://docs.databricks.com/dev-tools/api/latest/authentication.html) on your Databricks account
 2. Install and configure your [Databricks CLI](https://docs.databricks.com/dev-tools/cli/index.html) (This example repository uses your default Databricks profile) 
    1. `pip install databricks-cli`
@@ -34,16 +36,16 @@ You are good to go :)
 
 Try to execute `make help`, this will show the actions available.
 
-# Project structure
+## Project structure
 
 The project is structured in 3 folders:
-* `jobs`: Contains job definition and configuration of the scheduled Databricks jobs, along with the notebooks that execute them. More details on the jobs [Readme.md](./jobs/Readme.md) 
+* `jobs`: Contains job definition and configuration of the scheduled Databricks jobs, along with the notebooks that execute them. More details can be found in the jobs [Readme.md](./jobs/Readme.md) 
 * `scala`: Contains the Scala code and relative unit tests. The content of this directory gets compiled, packaged and deployed to each environment.
-* `scripts`: Contains bash scripts that are used for managing the environment deployments and development workflow. This scripts are triggered through the `make` targets.
+* `scripts`: Contains bash scripts that are used for managing the environment deployments and development workflow. These scripts are triggered through the `make` targets.
 
-# Deploy an environment
+## Deploy an environment
 
-You can deploy them by using the `make deploy` target.
+You can deploy an environment by using the `make deploy` target.
 
 Eg. `make deploy env=staging`
 
@@ -51,11 +53,11 @@ By default you have 2 environments available: `staging` and `production`.
 
 There is a third environment called `integration_test`, which will be deployed without any scheduling, and it is used for running integration tests. There is no need to deploy the `integration_test` environment explicitly, as it is taken care of by the integration test script.
 
-# Run unit test
+## Run unit test
 
 Execute `make test`
 
-# Run integration tests
+## Run integration tests
 
 The integration test will run on the Databricks platform. It will deploy an independent environment called `integration_test`, and will execute sequentially all the jobs defined in [integration_test.json](./jobs/environments/integration_test.json) under `.active_jobs` section.
 
