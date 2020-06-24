@@ -15,7 +15,7 @@ This code can help you to get a possible answer for the questions you might have
 * How do I organize the code?
 * How do I manage multiple environments and configurations?
 
-# Getting started
+## Getting started
 
 In order to get started you need to
 
@@ -33,14 +33,14 @@ You are good to go :)
 
 Try to execute `make help`, this will show the actions available.
 
-# Project structure
+## Project structure
 
 The project is structured in 3 folders:
 * `jobs`: Contains job definition and configuration of the scheduled Databricks jobs, along with the notebooks that execute them. More details on the jobs [Readme.md](./jobs/Readme.md) 
 * `scala`: Contains the Scala code and relative unit tests. The content of this directory gets compiled, packaged and deployed to each environment.
 * `scripts`: Contains bash scripts that are used for managing the environment deployments and development workflow. This scripts are triggered through the `make` targets.
 
-# Deploy an environment
+## Deploy an environment
 
 You can deploy them by using the `make deploy` target.
 
@@ -50,11 +50,11 @@ By default you have 2 environments available: `staging` and `production`.
 
 There is a third environment called `integration_test`, which will be deployed without any scheduling, and it is used for running integration tests. There is no need to deploy the `integration_test` environment explicitly, as it is taken care of by the integration test script.
 
-# Run unit test
+## Run unit test
 
 Execute `make test`
 
-# Run integration tests
+## Run integration tests
 
 The integration test will run on the Databricks platform. It will deploy an independent environment called `integration_test`, and will execute sequentially all the jobs defined in [integration_test.json](./jobs/environments/integration_test.json) under `.active_jobs` section.
 
