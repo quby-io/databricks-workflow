@@ -4,14 +4,14 @@ This repository is an *example* of how to use Databricks for setting up a robust
 
 If you are part of a Data Engineering or Data Science team, and you want to start a project in Databricks, you can use this repository as a jump start. 
 
-Using the Databricks platform since 2017, this template shows some of the best practices and processes we have set up for production, research and development at [Quby](https://www.quby.com/).
+This template shows some of the best practices and processes we have set up for production, research and development at [Quby](https://www.quby.com/).
 
 This code can help you to get an answer to the questions you might have when starting from scratch, like:
 * How do I set up a production pipeline in Databricks?
 * How do I run unit tests on Spark transformations?
 * How do I run integration tests on Notebook work flows?
 * How do I rapidly prototype data transformations on real data?
-* How do I refactor notebooks experiments into tested code?
+* How do I refactor notebook experiments into tested code?
 * How do I organize the code?
 * How do I manage multiple environments and configurations?
 
