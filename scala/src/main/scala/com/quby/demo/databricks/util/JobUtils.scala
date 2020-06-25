@@ -3,12 +3,12 @@ package com.quby.demo.databricks.util
 import org.joda.time.DateTime
 import org.joda.time.format.ISODateTimeFormat
 
-/***
+/**
   * Contains helper functions to be used by Notebooks.
   */
 object JobUtils extends RunOnUTC {
 
-  /***
+  /**
     * Returns the provided date if nonempty, otherwise returns the current UTC date.
     * @param utcDate Date in ISO8601 formatted string (YYYY-MM-DD) or an empty string
     * @return Date in ISO8601 formatted string (YYYY-MM-DD)
@@ -22,7 +22,7 @@ object JobUtils extends RunOnUTC {
     }
   }
 
-  /***
+  /**
     * Parses the date string, subtracts a number of days and formats the date back to string.
     *
     * FAQ: Why do we use String type instead of Date type?

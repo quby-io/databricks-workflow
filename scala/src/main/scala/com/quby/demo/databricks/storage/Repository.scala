@@ -3,7 +3,7 @@ package com.quby.demo.databricks.storage
 import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema}
 import org.apache.spark.sql.Dataset
 
-/***
+/**
   * Repository is the interface we use to access data from the storage.
   *
   * The two implementations are:
@@ -12,7 +12,7 @@ import org.apache.spark.sql.Dataset
   */
 trait Repository {
 
-  /***
+  /**
     * The raw table contains all the IoT signals collected from the devices stored with RawSchema schema.
     * The table is partitioned by utcDate and variableName.
     *
@@ -30,7 +30,7 @@ trait Repository {
     */
   def raw(utcDateFrom: String, utcDateTo: String): Dataset[RawSchema]
 
-  /***
+  /**
     * This retrieves the electricity power signal extracted from the raw data.
     *
     * @param utcDateFrom Date in ISO8601 formatted string (YYYY-MM-DD)
@@ -39,7 +39,7 @@ trait Repository {
     */
   def electricityPower(utcDateFrom: String, utcDateTo: String): Dataset[ElectricityPowerSchema]
 
-  /***
+  /**
     * Overwrites a slice of the time series data, assuming it is partitioned by date.
     *
     * FAQ: Why overwriting instead of appending?

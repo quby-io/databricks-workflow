@@ -15,7 +15,7 @@ class SampleRepository(minutesStep: Int, randomSeed: Int = 42)
 
   case class SampleTimestamp(i: Int, ts: DateTime)
 
-  /***
+  /**
     * Creates a range of timestamps for the data range with minutesStep resolution
     * @param dateFrom UTC Date from (inclusive) in format YYYY-MM-DD
     * @param dateTo UTC Date to (inclusive) in format YYYY-MM-DD
