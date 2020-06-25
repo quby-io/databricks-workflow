@@ -4,7 +4,7 @@ import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 import org.apache.spark.sql.types.StructType
 
-/***
+/**
   * Helper functions to manage Databricks Delta catalog
   */
 object CatalogHelper extends SparkActiveSession {

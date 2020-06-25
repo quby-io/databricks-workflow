@@ -26,8 +26,9 @@ object JobUtils extends RunOnUTC {
     * Parses the date string, subtracts a number of days and formats the date back to string.
     *
     * FAQ: Why do we use String type instead of Date type?
-    *      -> The parameters in Databricks notebooks are passed as Stings, and we partition the IoT data
-    *         by utcDate (String type).
+    *      -> The parameters in Databricks notebooks are passed as Strings, and we partition the IoT data
+    *         by utcDate (String type) because this produces a flat partitioning "YYYY-MM-DD" structure as opposed to a  
+    *         hierarchical partitioning produced by Date types (YYYY/MM/DD).
     * @param utcDate Date in ISO8601 formatted string (YYYY-MM-DD).
     * @param days Number of days to subtract
     * @return Date in ISO8601 formatted string (YYYY-MM-DD)
