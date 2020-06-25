@@ -4,6 +4,9 @@ import com.quby.demo.databricks.schema.{RawSchema, ElectricityPowerSchema}
 import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 
+/**
+  * ElectricityPower contains the transform function to clean and extract the electricity signal from the raw data
+  */
 object ElectricityPower extends SparkActiveSession {
 
   import spark.implicits._
@@ -11,7 +14,7 @@ object ElectricityPower extends SparkActiveSession {
   val minPowerW = 0
   val maxPowerW = 50000
 
-  /***
+  /**
     * Extracts and cleans the electricity power signal from all other IoT signals in the raw table.
     * @param raw Dataset with all IoT signals
     * @return Dataset with a clean electricity power signal
