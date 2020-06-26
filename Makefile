@@ -28,6 +28,10 @@ publish: assembly ## Publishes artifacts on Databricks dbfs
 deploy: publish ## Deploys artifacts, notebooks and jobs to Databricks [make deploy env=staging]
 	bash scripts/deploy_jobs.sh $(env) $(ARTIFACT_ID)
 
+.PHONY: dev
+dev: publish ## Deploys artifacts, notebooks to Databricks [make dev env=staging job=create_features]
+	bash scripts/dev.sh $(env) $(job) $(ARTIFACT_ID)
+
 .PHONY: import_dev_notebooks
 import_dev_notebooks: ## Imports notebooks from dev [make import_dev_notebooks env=staging job=create_features]
 	bash scripts/import_notebooks.sh "/dev/$(env)/$(job)/$(ARTIFACT_ID)"
