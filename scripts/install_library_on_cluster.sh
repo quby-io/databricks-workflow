@@ -3,7 +3,7 @@ set -e
 
 if [ $# -lt 1 ]
   then
-    echo "Please specify the cluster name [and job notebook path]"
+    echo "Please specify the cluster name"
     echo "Usage: ./install_library_on_cluster.sh my_cluster_name"
     exit 1
 fi
