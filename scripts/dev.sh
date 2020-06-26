@@ -18,7 +18,7 @@ ARTIFACTS_PATH="dbfs:/artifacts/$ARTIFACT_ID/"
 DOWNLOAD_PATH="/tmp/artifacts/tmp"
 TEMP_PATH="/tmp/artifacts/$ARTIFACT_ID"
 DBFS_PATH="dbfs:/env-artifacts/$ENV/$ARTIFACT_ID"
-NOTEBOOK_ROOT_PATH="$DATABRICKS_PATH/$ENV/$JOB_NAME/$ARTIFACT_ID"
+NOTEBOOK_ROOT_PATH="$DATABRICKS_PATH/$ENV/$JOB_NAME"
 
 if [[ -d "$TEMP_PATH" ]]; then
     echo "$TEMP_PATH exists. Using existing artifacts."
