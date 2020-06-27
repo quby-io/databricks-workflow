@@ -25,7 +25,12 @@ publish: assembly ## Publishes artifacts on Databricks dbfs
 
 .PHONY: deploy
 deploy: publish ## Deploys artifacts, notebooks and jobs to Databricks [make deploy env=staging]
-	bash scripts/deploy_jobs.sh --environment=$(env) --build_version="$(JAR_VERSION)-$(GIT_REVISION)" --skip_jobs="$(skip_jobs)"
+	echo "Uploading notebooks and jar"
+	bash scripts/upload_notebooks_and_jar.sh --environment=$(env) --artifact_id="$(JAR_VERSION)-$(GIT_REVISION)"
+ifndef skip-jobs
+	echo "Deploying jobs"
+	bash scripts/deploy_jobs.sh --environment=$(env) --artifact_id="$(JAR_VERSION)-$(GIT_REVISION)"
+endif
 
 .PHONY: import_notebooks
 import_notebooks: ## Imports notebooks from environment deployment [make import_notebooks env=staging]
