@@ -1,17 +1,14 @@
 #!/bin/bash
 set -e
 
-if [ $# -lt 2 ]
+if [ $# -lt 1 ]
   then
-    echo "Please specify the environment (dev/staging/production) and artifact version."
-    echo "Usage: ./import_notebooks.sh test"
+    echo "Please specify the notebook path."
+    echo "Usage: ./import_notebooks.sh /pipeline/staging/0.0.1-df88b42"
     exit 1
 fi
 
-ENV=$1
-ARTIFACT_ID=$2
+NOTEBOOK_PATH=$1
 
-NOTEBOOK_ROOT_PATH="/pipeline/$ENV/$ARTIFACT_ID"
-
-databricks workspace export_dir -o "$NOTEBOOK_ROOT_PATH" jobs/notebooks/
+databricks workspace export_dir -o "$NOTEBOOK_PATH" jobs/notebooks/
 echo "Imported."

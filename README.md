@@ -1,6 +1,6 @@
-# Databricks Workflow
+# Databricks Workflow (Alpha)
 
-This repository is an *example* of how to use Databricks for setting up a robust data processing pipeline.
+This repository is an *example* of how to use Databricks for setting up a multi-environment data processing pipeline. 
 
 If you are part of a Data Engineering or Data Science team, and you want to start a project in Databricks, you can use this repository as a jump start. 
 
@@ -42,6 +42,23 @@ The project is structured in 3 folders:
 * `jobs`: Contains job definition and configuration of the scheduled Databricks jobs, along with the notebooks that execute them. More details can be found in the jobs [Readme.md](./jobs/Readme.md) 
 * `scala`: Contains the Scala code and relative unit tests. The content of this directory gets compiled, packaged and deployed to each environment.
 * `scripts`: Contains bash scripts that are used for managing the environment deployments and development workflow. These scripts are triggered through the `make` targets.
+
+## Development workflow
+
+When creating a new feature from real data you can procede like this:
+
+1. Create a new environment
+   1. Duplicate `/jobs/environments/staging.json` and rename it to reflect the feature intent `/jobs/environments/dev_my_feature.json`
+   2. Adjust the configuration of the new environment to fit your needs (eg. change the `featureDb` parameter)
+   3. Deploy the notebooks and cluster with the whole stack `make dev env=dev_my_feature job=create_features`.
+      Now you should have a new cluster with your libraries installed and a copy of your notebook to work on.
+2. Navigate to your notebook directory `/dev/dev_my_feature/create_features` and attach your notebook to the newly created cluster `dev_my_feature_create_features`
+3. Explore, apply and try all the changes you need
+4. Import the notebooks back to your local development environment `make import_dev_notebooks env=dev_my_feature job=create_features`
+5. Refactor your code by extracting the new logic in a transformation function
+6. Add unit tests to your function
+7. Run an integration test `make integration_test`
+8. Deploy the new job in your insulated environment `make deploy env=dev_my_feature`
 
 ## Deploy an environment
 
