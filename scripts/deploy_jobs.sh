@@ -84,7 +84,10 @@ do
       if [ -n "$RUNNING_JOB_ID" ]
         then
             echo "The job $RUNNING_JOB_ID (${ENV} - ${JOB_NAME}) is running. Stopping and restarting it"
-
+            
+            # cancel running job
+            databricks runs cancel --run-id "$RUNNING_JOB_ID"
+            
             # wait until life_cycle_state == TERMINATED
             while [ $(databricks runs list --active-only --limit 1000 --output json | jq -r ".runs[] | select(.job_id == $JOB_ID and .run_id == $RUNNING_JOB_ID) | .state.life_cycle_state ") != "TERMINATED" ];do
               sleep 0.1 #100ms

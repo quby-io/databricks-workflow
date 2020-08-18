@@ -1,6 +1,6 @@
-# Databricks Workflow
+# Databricks Workflow (Alpha)
 
-This repository is an *example* of how to use Databricks for setting up a robust data processing pipeline.
+This repository is an *example* of how to use Databricks for setting up a multi-environment data processing pipeline. 
 
 If you are part of a Data Engineering or Data Science team, and you want to start a project in Databricks, you can use this repository as a jump start. 
 
