@@ -9,7 +9,7 @@ fi
 
 ARTIFACT_ID=$1
 TEMP_PATH="/tmp/artifacts/$ARTIFACT_ID"
-DESTINATION_PATH="dbfs:/artifacts/toon-datasience/$ARTIFACT_ID"
+DESTINATION_PATH="dbfs:/artifacts/databricks-workflow/$ARTIFACT_ID"
 
 if [[ -d "$TEMP_PATH" ]]; then
     echo "$TEMP_PATH already exists. Removing it's content"
@@ -45,3 +45,4 @@ echo "Done"
 
 echo "Publishing artifacts to $DESTINATION_PATH"
 dbfs cp --overwrite --recursive $TEMP_PATH $DESTINATION_PATH
+echo "Published"

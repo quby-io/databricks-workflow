@@ -34,7 +34,7 @@ dev: publish ## Deploys artifacts, notebooks to Databricks [make dev env=staging
 
 .PHONY: import_dev_notebooks
 import_dev_notebooks: ## Imports notebooks from dev [make import_dev_notebooks env=staging job=create_features]
-	bash scripts/import_notebooks.sh "/dev/$(env)/$(job)/$(ARTIFACT_ID)"
+	bash scripts/import_notebooks.sh "/dev/$(env)/$(job)"
 
 .PHONY: import_job_notebooks
 import_job_notebooks: ## Imports notebooks from a job environment deployment [make import_job_notebooks env=staging]
