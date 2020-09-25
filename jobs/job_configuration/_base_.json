@@ -4,7 +4,11 @@
     "notebook_task": {
       "base_parameters": {
         "environment": "{{ENVIRONMENT}}",
-        "jobName" : "{{JOB_NAME}}"
+        "jobName" : "{{JOB_NAME}}",
+        "GroupName" : "BigData",
+        "Provisioner" : "Databricks",
+        "Tenant" : "eneco",
+        "Stage" : "development"
       },
       "notebook_path": "{{NOTEBOOK_ROOT_PATH}}/{{JOB_NAME}}"
     },

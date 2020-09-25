@@ -5,10 +5,7 @@
         "days": "1"
       }
     },
-    "schedule": {
-      "timezone_id": "UTC",
-      "quartz_cron_expression": "0 0 0 * * ?"
-    },
+
     "timeout_seconds": 0,
     "max_concurrent_runs": 1,
     "max_retries": 3,
