@@ -1,6 +1,5 @@
 package com.quby.demo.databricks.storage
 
-import java.sql.Timestamp
 import com.quby.demo.databricks.BaseTest
 import com.quby.demo.databricks.schema.ElectricityPowerSchema
 import org.joda.time.DateTime
@@ -47,6 +46,6 @@ class SampleRepositoryTest extends BaseTest {
 
     val result = repository.raw(dateFrom, dateTo).collect()
 
-    assert(result.length === 24 * 4)
+    assert(result.length === 24 * 5)
   }
 }
