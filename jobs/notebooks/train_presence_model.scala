@@ -44,52 +44,21 @@ val repository = new DeltaRepository(rawDb, featureDb)
 
 // COMMAND ----------
 
-// DBTITLE 1,Read input data
-val raw = repository.raw(utcDateFrom, utcDateTo)
+// DBTITLE 1,Read labels
+val presenceLabels = repository.presenceLabels(utcDateFrom, utcDateTo)
 
 // COMMAND ----------
 
 // DBTITLE 1,Execute transformations
 // Extract electricity power measurements from raw IoT data
-val power = ElectricityPower.transform(raw)
+val power = repository.power(utcDateFrom, utcDateTo)
 
 // COMMAND ----------
 
-// DBTITLE 1,Persist results
-// Persist power measurements in it's own table
-// We always overwrite a date range, in order to guarantee idempotency constraint
-repository.overwriteDateRange(power, featureDb, TableNames.electricityPower, Seq("utcDate"), utcDateFrom, utcDateTo)
-
-// COMMAND ----------
-
-// DBTITLE 1,Execute transformations
-// Extract electricity power measurements from raw IoT data
-val presence_label = PresenceLabel.transform(raw)
-
-// COMMAND ----------
-
-// DBTITLE 1,Persist results
-// Persist power measurements in it's own table
-// We always overwrite a date range, in order to guarantee idempotency constraint
-repository.overwriteDateRange(presence_label, featureDb, TableNames.presenceLabel, Seq("utcDate"), utcDateFrom, utcDateTo)
+val ds = power.join(presenceLabels, Seq("uuid", "ts"))
 
 
-// DBTITLE 1,Assert expectations
-// Assert the number of users is in expected range
 
-val usersCount = raw
-  .select($"userId")
-  .distinct()
-  .count()
-
-val usersWithPowerCount = repository
-  .electricityPower(utcDateFrom, utcDateTo)
-  .select($"userId")
-  .distinct()
-  .count()
-
-assert(usersWithPowerCount >= usersCount * 0.9, "The number of users with power should be at least 90% of the total user count")
-assert(usersWithPowerCount <= usersCount, "The number of users with power should be less than or equal to the total user count")
 
 // COMMAND ----------
 

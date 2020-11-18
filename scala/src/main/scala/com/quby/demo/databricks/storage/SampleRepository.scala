@@ -37,13 +37,18 @@ class SampleRepository(minutesStep: Int, randomSeed: Int = 42)
 
     range(dateFrom, dateTo)
       .flatMap(
-        t =>
+        t => {
+          val user_1_power = rand.nextInt(250)
+          val user_2_power = rand.nextInt(600)
+
           Seq(
             RawSchema.create("user-1", "temperature_c", rand.nextInt(30).toString, t.ts.getMillis),
             RawSchema.create("user-2", "temperature_c", rand.nextInt(32).toString, t.ts.getMillis),
-            RawSchema.create("user-1", "power_w", rand.nextInt(250).toString, t.ts.getMillis),
-            RawSchema.create("user-2", "power_w", rand.nextInt(600).toString, t.ts.getMillis)
-        ))
+            RawSchema.create("user-1", "power_w", user_1_power.toString, t.ts.getMillis),
+            RawSchema.create("user-2", "power_w", user_2_power.toString, t.ts.getMillis),
+            RawSchema.create("user-1", "is_someone_home", (user_1_power > 200).toString, t.ts.getMillis),
+          )
+        })
       .toDS()
   }
 
