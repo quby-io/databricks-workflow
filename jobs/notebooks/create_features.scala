@@ -69,10 +69,12 @@ val presence_label = PresenceLabel.transform(raw)
 // COMMAND ----------
 
 // DBTITLE 1,Persist results
-// Persist power measurements in it's own table
+// Persist presence label measurement in it's own table
 // We always overwrite a date range, in order to guarantee idempotency constraint
 repository.overwriteDateRange(presence_label, featureDb, TableNames.presenceLabel, Seq("utcDate"), utcDateFrom, utcDateTo)
 
+
+// COMMAND ----------
 
 // DBTITLE 1,Assert expectations
 // Assert the number of users is in expected range
