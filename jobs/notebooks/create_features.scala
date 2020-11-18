@@ -6,8 +6,8 @@
 // COMMAND ----------
 
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-import com.quby.demo.databricks.storage.{DeltaRepository, SampleRepository, TableNames}
-import com.quby.demo.databricks.transformations.ElectricityPower
+import com.quby.demo.databricks.storage.{DeltaRepository, TableNames}
+import com.quby.demo.databricks.transformations.{ElectricityPower, PresenceLabel}
 import com.quby.demo.databricks.util.JobUtils
 import org.apache.spark.sql.SparkSession
 

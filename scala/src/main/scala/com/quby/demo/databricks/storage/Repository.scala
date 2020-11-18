@@ -1,6 +1,6 @@
 package com.quby.demo.databricks.storage
 
-import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema}
+import com.quby.demo.databricks.schema.{ElectricityPowerSchema, PresenceLabelSchema, RawSchema}
 import org.apache.spark.sql.Dataset
 
 /**
@@ -63,4 +63,7 @@ trait Repository {
                          dateFrom:       String,
                          dateTo:         String,
                          dateColumnName: String = "utcDate")
+
+
+  def presenceLabels(utcDateFrom: String, utcDateTo: String): Dataset[PresenceLabelSchema]
 }

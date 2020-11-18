@@ -6,8 +6,7 @@
 // COMMAND ----------
 
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-import com.quby.demo.databricks.storage.{DeltaRepository, SampleRepository, TableNames}
-import com.quby.demo.databricks.transformations.ElectricityPower
+import com.quby.demo.databricks.storage.DeltaRepository
 import com.quby.demo.databricks.util.JobUtils
 import org.apache.spark.sql.SparkSession
 
@@ -31,7 +30,6 @@ val utcDateTo = JobUtils.getOrTodayUTC(dbutils.widgets.get("utcDate"))
 val utcDateFrom = JobUtils.subtractDays(utcDateTo, days)
 
 implicit val spark = SparkSession.builder().getOrCreate()
-import spark.implicits._
 
 // COMMAND ----------
 
@@ -51,11 +49,11 @@ val presenceLabels = repository.presenceLabels(utcDateFrom, utcDateTo)
 
 // DBTITLE 1,Execute transformations
 // Extract electricity power measurements from raw IoT data
-val power = repository.power(utcDateFrom, utcDateTo)
+val power = repository.electricityPower(utcDateFrom, utcDateTo)
 
 // COMMAND ----------
 
-val ds = power.join(presenceLabels, Seq("uuid", "ts"))
+val ds = power.join(presenceLabels, Seq("userId", "ts"))
 
 
 
