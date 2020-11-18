@@ -5,8 +5,7 @@ import java.time.format.DateTimeFormatter
 
 case class PresenceLabelSchema(
                       userId:        String,
-                      variableName:  String,
-                      variableValue: String,
+                      isSomeoneHome:  Int,
                       ts:            Timestamp,
                       utcDate:       String
                     )
@@ -14,13 +13,12 @@ case class PresenceLabelSchema(
 object PresenceLabelSchema {
   def create(
               userId:        String,
-              variableName:  String,
-              variableValue: String,
+              isSomeoneHome:  Int,
               tsMillis:      Long
             ) = {
     val timeStamp  = new Timestamp(tsMillis)
     val utcDate = timeStamp.toLocalDateTime.format(DateTimeFormatter.ISO_DATE)
-    PresenceLabelSchema(userId, variableName, variableValue, timeStamp, utcDate)
+    PresenceLabelSchema(userId, isSomeoneHome, timeStamp, utcDate)
   }
 }
 

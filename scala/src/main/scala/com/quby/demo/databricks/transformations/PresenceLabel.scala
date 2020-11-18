@@ -20,9 +20,11 @@ object PresenceLabel extends SparkActiveSession {
     * @return Dataset with a clean electricity power signal
     */
   def transform(raw: Dataset[RawSchema]): Dataset[PresenceLabelSchema] = {
+    import org.apache.spark.sql.functions.when
+
     raw
       .filter($"variableName" === "is_someone_home")
-      .withColumn("isSomeoneHome", $"variableValue".cast("int"))
+      .withColumn("isSomeoneHome", when($"variableValue" === "true", 1).otherwise(0).cast("int"))
       .select("userId", "ts", "isSomeoneHome", "utcDate")
       .as[PresenceLabelSchema]
   }

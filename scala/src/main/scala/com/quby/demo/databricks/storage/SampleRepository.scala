@@ -79,8 +79,8 @@ class SampleRepository(minutesStep: Int, randomSeed: Int = 42)
       .flatMap(
         seed =>
           Seq(
-            PresenceLabelSchema.create("user-1", "isSomeoneHome", rand.nextInt(1).toString, seed.ts.getMillis),
-            PresenceLabelSchema.create("user-2", "isSomeoneHome", rand.nextInt(0).toString, seed.ts.getMillis)
+            PresenceLabelSchema.create("user-1", 1,  seed.ts.getMillis),
+            PresenceLabelSchema.create("user-2", 0,  seed.ts.getMillis)
           ))
       .toDS()
   }
