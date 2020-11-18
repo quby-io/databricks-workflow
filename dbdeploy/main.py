@@ -2,7 +2,7 @@ import json
 import os
 from databricks_cli.sdk.api_client import ApiClient
 
-client = ApiClient(user="erni.durdevic@quby.com", token="dapic5e95d791ffcd1e160d28c00af1d5ef3", host="https://quby.cloud.databricks.com")
+client = ApiClient(user="", token="", host="https://quby.cloud.databricks.com")
 
 base_path = "/Users/erni/git/databricks-workflow/jobs"
 
