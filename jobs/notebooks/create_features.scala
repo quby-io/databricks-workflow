@@ -63,7 +63,7 @@ repository.overwriteDateRange(power, featureDb, TableNames.electricityPower, Seq
 // COMMAND ----------
 
 // DBTITLE 1,Execute transformations
-// Extract electricity power measurements from raw IoT data
+// Extract presence label measurements from raw IoT data
 val presence_label = PresenceLabel.transform(raw)
 
 // COMMAND ----------
