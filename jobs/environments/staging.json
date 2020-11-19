@@ -1,5 +1,5 @@
 {
-  "active_jobs": ["initialize", "create_features"],
+  "active_jobs": ["initialize", "create_features", "train_presence_model", "monitor_presence_model"],
   "config": {
     "settings": {
       "notebook_task": {

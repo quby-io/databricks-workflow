@@ -6,8 +6,8 @@
 // COMMAND ----------
 
 import com.databricks.dbutils_v1.DBUtilsHolder.dbutils
-import com.quby.demo.databricks.storage.{DeltaRepository, SampleRepository, TableNames}
-import com.quby.demo.databricks.transformations.ElectricityPower
+import com.quby.demo.databricks.storage.{DeltaRepository, TableNames}
+import com.quby.demo.databricks.transformations.{ElectricityPower, PresenceLabel}
 import com.quby.demo.databricks.util.JobUtils
 import org.apache.spark.sql.SparkSession
 
@@ -59,6 +59,20 @@ val power = ElectricityPower.transform(raw)
 // Persist power measurements in it's own table
 // We always overwrite a date range, in order to guarantee idempotency constraint
 repository.overwriteDateRange(power, featureDb, TableNames.electricityPower, Seq("utcDate"), utcDateFrom, utcDateTo)
+
+// COMMAND ----------
+
+// DBTITLE 1,Execute transformations
+// Extract presence label measurements from raw IoT data
+val presence_label = PresenceLabel.transform(raw)
+
+// COMMAND ----------
+
+// DBTITLE 1,Persist results
+// Persist presence label measurement in it's own table
+// We always overwrite a date range, in order to guarantee idempotency constraint
+repository.overwriteDateRange(presence_label, featureDb, TableNames.presenceLabel, Seq("utcDate"), utcDateFrom, utcDateTo)
+
 
 // COMMAND ----------
 

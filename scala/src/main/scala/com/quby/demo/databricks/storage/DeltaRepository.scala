@@ -1,6 +1,6 @@
 package com.quby.demo.databricks.storage
 
-import com.quby.demo.databricks.schema.{ElectricityPowerSchema, RawSchema}
+import com.quby.demo.databricks.schema.{ElectricityPowerSchema, PresenceLabelSchema, RawSchema}
 import com.quby.demo.databricks.util.SparkActiveSession
 import org.apache.spark.sql.Dataset
 
@@ -46,4 +46,8 @@ class DeltaRepository(rawDb: String, featureDb: String) extends Repository with 
       .save(CatalogHelper.getTableProperty(db, table, "Location"))
   }
 
+  override def presenceLabels(dateFrom: String, dateTo: String): Dataset[PresenceLabelSchema] = {
+    read(featureDb, TableNames.presenceLabel, dateFrom, dateTo)
+      .as[PresenceLabelSchema]
+  }
 }

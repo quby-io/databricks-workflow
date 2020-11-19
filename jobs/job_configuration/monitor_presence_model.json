@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "notebook_task": {
+      "base_parameters": {
+        "days": "1"
+      }
+    },
+    "timeout_seconds": 0,
+    "max_concurrent_runs": 1,
+    "max_retries": 1,
+    "min_retry_interval_millis": 300000
+  }
+}
