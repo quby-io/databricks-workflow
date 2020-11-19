@@ -52,11 +52,80 @@ val presenceLabels = repository.presenceLabels(utcDateFrom, utcDateTo)
 val power = repository.electricityPower(utcDateFrom, utcDateTo)
 
 // COMMAND ----------
-
+// DBTITLE 1,Preprocess data
 val ds = power.join(presenceLabels, Seq("userId", "ts"))
+
+
+
+// COMMAND ----------
+// DBTITLE 1,Train model: Split data into training and test sets
+
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.classification.DecisionTreeClassifier
+import org.apache.spark.ml.feature.VectorAssembler
+
+
+val Array(training, test) = ds.randomSplit(Array(0.6, 0.4), seed = 11L)
+training.cache()
+
+val assembler = new VectorAssembler()
+  .setInputCols(Array("powerW"))
+  .setOutputCol("features")
+
+val dtc = new DecisionTreeClassifier().setLabelCol("isSomeoneHome")
+val pipeline = new Pipeline().setStages(Array(assembler, dtc))
+
+val model = pipeline.fit(training)
+
+// COMMAND ----------
+// DBTITLE 1,Transform model
+val predicted = model.transform(test)
+
+display(predicted)
+
+// COMMAND ----------
+// DBTITLE 1,Use mlFlow experiment for model tracking
+
+import org.mlflow.tracking.ActiveRun
+import org.mlflow.tracking.MlflowContext
+
+val mlflowContext = new MlflowContext()
+
+val experimentName = "/PresencePredictions"
+val client = mlflowContext.getClient()
+
+if(!client.getExperimentByName(experimentName).isPresent()) {
+  client.createExperiment(experimentName)
+}
+
+mlflowContext.setExperimentName(experimentName)
+
+val run = mlflowContext.startRun("presence_experiment_run")
 
 
 
 
 // COMMAND ----------
+// DBTITLE 1,log metrics
 
+import org.apache.spark.mllib.evaluation.BinaryClassificationMetrics
+
+val predictionAndLabels = predicted.select('isSomeoneHome.cast("Double"), 'prediction).rdd
+  .map(row =>
+    (row.getAs[Double]("prediction"), row.getAs[Double]("isSomeoneHome"))
+  )
+
+// Instantiate metrics object
+val metrics = new BinaryClassificationMetrics(predictionAndLabels)
+
+val auROC = metrics.areaUnderROC
+run.logMetric("auROC", auROC)
+
+val utcDate = JobUtils.getOrTodayUTC("")
+run.logParam("date", utcDate)
+
+
+// COMMAND ----------
+// DBTITLE 1,Finish running experiment
+
+run.endRun()
